@@ -64,7 +64,7 @@ askuser() {\
 		read -p username
 		if id "$username" &>/dev/null; then
 			echo " :: User $username found!"
-			break;
+			break
 		else
 			echo " :: User $username doesn't exist!"
 		fi
