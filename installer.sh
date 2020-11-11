@@ -13,7 +13,7 @@ dotfiles_repo="https://github.com/xslendix/dotfiles.git"
 pkginstall() { xbps-install -y "$1" | tee -a install_log.txt ;}
 pipinstall() { pip3 install "$1" | tee -a install_log.txt ;}
 gitinstall() { \
-	pname="$(basename "$1".git)"
+	pname="$(basename "$1" .git)"
 	srcdir="$repodir/$pname"
 	echo " :: Installing $pname in $repodir (git/make)"
 	sudo -u "$username" git clone --depth 1 "$1" "$srcdir"
@@ -23,7 +23,7 @@ gitinstall() { \
 	cd /tmp || error "FATAL: Could not change directory to /tmp! Base installation may be broken!"
 	}
 gitinstall2() { \
-	pname="$(basename "$1".git)"
+	pname="$(basename "$1" .git)"
 	srcdir="$repodir/$pname"
 	echo " :: Installing $pname in $repodir (git/make)"
 	sudo -u "$username" git clone --depth 1 "$1" "$srcdir"
