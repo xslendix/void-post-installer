@@ -10,7 +10,7 @@ prfile="programs.csv"
 #dotfiles_repo="https://git.xslendi.xyz/xSlendiX/dotfiles.git"
 dotfiles_repo="https://github.com/xslendix/dotfiles.git"
 
-pkginstall() { xbps-install -Sy "$1" | tee -a install_log.txt ;}
+pkginstall() { xbps-install -y "$1" | tee -a install_log.txt ;}
 pipinstall() { pip3 install "$1" | tee -a install_log.txt ;}
 gitinstall() { \
 	pname="$(basename "$1".git)"
