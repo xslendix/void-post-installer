@@ -34,7 +34,7 @@ gitinstall2() {
 	make install
 	cd /tmp || error "FATAL: Could not change directory to /tmp! Base installation may be broken!"
 }
-error() { printf " :: An error occured during install!\\n\\t%s\\n" "$1"; exit 1 }
+error() { printf " :: An error occured during install!\\n\\t%s\\n" "$1"; exit 1; }
 
 firstmsg() {
 	echo "Welcome to xSlendiX's ricing script!"
