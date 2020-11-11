@@ -10,9 +10,9 @@ prfile="programs.csv"
 #dotfiles_repo="https://git.xslendi.xyz/xSlendiX/dotfiles.git"
 dotfiles_repo="https://github.com/xslendix/dotfiles.git"
 
-pkginstall() { xbps-install -Sy "$1" >> install_log.txt }
-pipinstall() { pip3 install "$1" >> install_log.txt }
-gitinstall() {
+pkginstall() { xbps-install -Sy "$1" >> install_log.txt ;}
+pipinstall() { pip3 install "$1" >> install_log.txt ;}
+gitinstall() { \
 	pname="$(basename "$1".git)"
 	srcdir="$repodir/$pname"
 	echo " :: Installing $pname in $repodir (git/make)"
@@ -21,8 +21,8 @@ gitinstall() {
 	sudo -u "$username" make
 	make install
 	cd /tmp || error "FATAL: Could not change directory to /tmp! Base installation may be broken!"
-}
-gitinstall2() {
+	}
+gitinstall2() { \
 	pname="$(basename "$1".git)"
 	srcdir="$repodir/$pname"
 	echo " :: Installing $pname in $repodir (git/make)"
@@ -33,10 +33,10 @@ gitinstall2() {
 	sudo -u "$username" make
 	make install
 	cd /tmp || error "FATAL: Could not change directory to /tmp! Base installation may be broken!"
-}
+	}
 error() { printf " :: An error occured during install!\\n\\t%s\\n" "$1"; exit 1; }
 
-firstmsg() {
+firstmsg() { \
 	echo "Welcome to xSlendiX's ricing script!"
 	echo ""
 	echo "This will install all my config files to your system. The script was"
@@ -56,9 +56,9 @@ firstmsg() {
 			* ) echo "Please enter a valid answer"
 		esac
 	done
-}
+	}
 
-askuser() {
+askuser() { \
 	while true; do
 		printf "Please provide the user account's username: "
 		read -p username
@@ -71,14 +71,14 @@ askuser() {
 	done
 	repodir="/home/$username/.local/src"
 	sudo -u $username mkdir -p /home/$username/.local/src
-}
+	}
 
-installdeps() {
+installdeps() { \
 	echo " :: Installing required dependencies..."
 	xbps-install -Syu xtools git python3 python3-pip base-devel
-}
+	}
 
-installloop() {
+installloop() { \
 	([ -f "$prfile" ] && cp "$prfile" /tmp/prfile.csv) || curl -Ls $gitraw/$prfile | sed '/^;/d' > /tmp/prfile.csv
 	total=$(wc -l /tmp/prfile.csv)
 	while IFS=, read -r type package comment; do
@@ -91,9 +91,9 @@ installloop() {
 			*) pkginstall "$program" ;;
 		esac
 	done < /tmp/prfile.csv
-}
+	}
 
-setupservices() {
+setupservices() { \
 	echo " :: Setting up startup services"
 	ln -sf /etc/sv/acpid /var/service
 	ln -sf /etc/sv/dbus /var/service
@@ -102,14 +102,14 @@ setupservices() {
 	ln -sf /etc/sv/udevd /var/service
 	rm -rf /var/service/dhcpcd
 	rm -rf /var/service/wpa_supplicant
-}
+	}
 
-finalize() {
+finalize() { \
 	echo " :: Finished installation!"
 	echo "All done! Enjoy your new system and thanks for using my rice!"
 	echo "Please note, however that stuff like system time and video"
 	echo "drivers have not yet been set up. You need to do this yourself."
-}
+	}
 
 if [ $(id -u) -ne 0 ] ; then echo " :: Please run the installer as root." ; exit 1 ; fi
 case "$(curl -s --max-time 2 -I http://google.com | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
