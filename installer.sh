@@ -113,9 +113,9 @@ finalize() { \
 
 if [ $(id -u) -ne 0 ] ; then echo " :: Please run the installer as root." ; exit 1 ; fi
 case "$(curl -s --max-time 2 -I http://google.com | sed 's/^[^ ]*  *\([0-9]\).*/\1/; 1q')" in
-	[23]) echo " :: HTTP connectivity is up"; exit;;
-	5) echo " :: The web proxy won't let us through";;
-	*) echo " :: The network is down or very slow";;
+	[23]) echo " :: HTTP connectivity is up";;
+	5) echo " :: The web proxy won't let us through"; exit;;
+	*) echo " :: The network is down or very slow"; exit;;
 esac
 
 firstmsg
