@@ -41,7 +41,7 @@ firstmsg() { \
 	echo ""
 	echo "This will install all my config files to your system. The script was"
 	echo "designed to work on fresh Void Linux installations. Other distributions"
-	echo -e "are currently not supported. \e[4mNot tested on musl\e[0m."
+	echo -e "are currently not supported. NOT TESTED ON MUSL!"
 	echo ""
 	DISTRO=$(cat /etc/*-release | grep ^NAME | awk -F\" '{print $2}')
 	echo " :: Detected Linux distribution: $DISTRO"
@@ -124,7 +124,7 @@ firstmsg
 askuser
 installdeps
 echo " :: Configuring makepkg.conf"
-sed -i "s/-j2/-j$(nproc)/;s/^#MAKEFLAGS/MAKEFLAGS/" /etc/makepkg.conf
+echo "MAKEFLAGS=\"-j$(nproc)\"" > /etc/makepkg.conf
 installloop
 
 echo " :: Installing dotfiles"
