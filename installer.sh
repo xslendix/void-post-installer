@@ -81,8 +81,10 @@ installdeps() { \
 installloop() { \
 	([ -f "$prfile" ] && cp "$prfile" /tmp/prfile.csv) || curl -Ls $gitraw/$prfile | sed '/^;/d' > /tmp/prfile.csv
 	total=$(wc -l /tmp/prfile.csv)
+	echo " :: Total packages to be installed: $total"
 	while IFS=, read -r type package comment; do
 		n=$((n+1))
+		echo " :: Installing package nr. $n: $package"
 		echo "$comment" | grep -q "^\".*\"$" && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$type" in
 			"P") pipinstall "$package" ;;
