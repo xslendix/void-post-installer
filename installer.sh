@@ -62,7 +62,7 @@ askuser() {\
 	while true; do
 		printf "Please provide the user account's username: "
 		read -p username
-		if id $typed > /dev/null 2>&1
+		if id "$username" &>/dev/null; then
 			echo " :: User $username found!"
 			break;
 		else
@@ -85,10 +85,10 @@ installloop() {\
 		n=$((n+1))
 		echo "$comment" | grep -q "^\".*\"$" && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$type" in
-			"P") pipinstall "$program"
-			"G") gitinstall "$program"
-			"C") gitinstall2 "$program"
-			*) pkginstall "$program"
+			"P") pipinstall "$program" ;;
+			"G") gitinstall "$program" ;;
+			"C") gitinstall2 "$program" ;;
+			*) pkginstall "$program" ;;
 		esac
 	done < /tmp/prfile.csv
 }
