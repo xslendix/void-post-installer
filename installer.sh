@@ -61,7 +61,7 @@ firstmsg() { \
 askuser() { \
 	while true; do
 		printf "Please provide the user account's username: "
-		read -p username
+		read username
 		if getent passwd "$username" > /dev/null 2>&1; then
 			echo " :: User $username found!"
 			break
