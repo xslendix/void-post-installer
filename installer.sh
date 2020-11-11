@@ -2,10 +2,13 @@
 
 # Install script inspired by Luke Smith's LARBS install script.
 
-repo="https://git.xslendi.xyz/xSlendiX/void-post-installer"
-gitraw="$repo/raw/branch/master"
+#repo="https://git.xslendi.xyz/xSlendiX/void-post-installer"
+repo="https://github.com/xslendix/void-post-installer"
+#gitraw="$repo/raw/branch/master"
+gitraw="https://raw.githubusercontent.com/xslendix/void-port-installer/master"
 prfile="programs.csv"
-dotfiles_repo="https://git.xslendi.xyz/xSlendiX/dotfiles.git"
+#dotfiles_repo="https://git.xslendi.xyz/xSlendiX/dotfiles.git"
+dotfiles_repo="https://github.com/xslendix/dotfiles.git"
 
 pkginstall() { xbps-install -Sy "$1" >> install_log.txt }
 pipinstall() { pip3 install "$1" >> install_log.txt }
