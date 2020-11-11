@@ -85,10 +85,10 @@ installloop() { \
 		n=$((n+1))
 		echo "$comment" | grep -q "^\".*\"$" && comment="$(echo "$comment" | sed "s/\(^\"\|\"$\)//g")"
 		case "$type" in
-			"P") pipinstall "$program" ;;
-			"G") gitinstall "$program" ;;
-			"C") gitinstall2 "$program" ;;
-			*) pkginstall "$program" ;;
+			"P") pipinstall "$package" ;;
+			"G") gitinstall "$package" ;;
+			"C") gitinstall2 "$package" ;;
+			*) pkginstall "$package" ;;
 		esac
 	done < /tmp/prfile.csv
 	}
